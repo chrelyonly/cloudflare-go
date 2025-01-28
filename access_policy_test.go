@@ -55,6 +55,12 @@ var (
 				ApprovalsNeeded: 1,
 			},
 		},
+		InfrastructureConnectionRules: &AccessInfrastructureConnectionRules{
+			SSH: &AccessInfrastructureConnectionRulesSSH{
+				Usernames:       []string{"root", "ec2-user"},
+				AllowEmailAlias: BoolPtr(true),
+			},
+		},
 	}
 )
 
@@ -115,7 +121,13 @@ func TestAccessPolicies(t *testing.T) {
 					],
 					"approvals_needed": 1
 				  }
-				]
+				],
+				"connection_rules": {
+					"ssh": {
+						"usernames": ["root", "ec2-user"],
+						"allow_email_alias": true
+					}
+				}
 			  }
 			],
 			"result_info": {
@@ -214,7 +226,13 @@ func TestAccessPolicy(t *testing.T) {
 						"email_addresses": ["email1@example.com", "email2@example.com"],
 						"approvals_needed": 1
 					}
-				]
+				],
+				"connection_rules": {
+					"ssh": {
+						"usernames": ["root", "ec2-user"],
+						"allow_email_alias": true
+					}
+				}
 			}
 		}
 		`)
@@ -307,7 +325,13 @@ func TestCreateAccessPolicy(t *testing.T) {
 						"email_addresses": ["email1@example.com", "email2@example.com"],
 						"approvals_needed": 1
 					}
-				]
+				],
+				"connection_rules": {
+					"ssh": {
+						"usernames": ["root", "ec2-user"],
+						"allow_email_alias": true
+					}
+				}
 			}
 		}
 		`)
@@ -343,6 +367,12 @@ func TestCreateAccessPolicy(t *testing.T) {
 			{
 				EmailAddresses:  []string{"email1@example.com", "email2@example.com"},
 				ApprovalsNeeded: 1,
+			},
+		},
+		InfrastructureConnectionRules: &AccessInfrastructureConnectionRules{
+			SSH: &AccessInfrastructureConnectionRulesSSH{
+				Usernames:       []string{"root", "ec2-user"},
+				AllowEmailAlias: BoolPtr(true),
 			},
 		},
 	}
@@ -415,6 +445,12 @@ func TestCreateAccessPolicyAuthContextRule(t *testing.T) {
 				ApprovalsNeeded: 1,
 			},
 		},
+		InfrastructureConnectionRules: &AccessInfrastructureConnectionRules{
+			SSH: &AccessInfrastructureConnectionRulesSSH{
+				Usernames:       []string{"root", "ec2-user"},
+				AllowEmailAlias: BoolPtr(true),
+			},
+		},
 	}
 
 	handler := func(w http.ResponseWriter, r *http.Request) {
@@ -462,7 +498,13 @@ func TestCreateAccessPolicyAuthContextRule(t *testing.T) {
 						"email_addresses": ["email1@example.com", "email2@example.com"],
 						"approvals_needed": 1
 					}
-				]
+				],
+				"connection_rules": {
+					"ssh": {
+						"usernames": ["root", "ec2-user"],
+						"allow_email_alias": true
+					}
+				}
 			}
 		}
 		`)
@@ -554,6 +596,12 @@ func TestUpdateAccessPolicy(t *testing.T) {
 				ApprovalsNeeded: 1,
 			},
 		},
+		InfrastructureConnectionRules: &AccessInfrastructureConnectionRules{
+			SSH: &AccessInfrastructureConnectionRulesSSH{
+				Usernames:       []string{"root", "ec2-user"},
+				AllowEmailAlias: BoolPtr(true),
+			},
+		},
 	}
 	handler := func(w http.ResponseWriter, r *http.Request) {
 		assert.Equal(t, http.MethodPut, r.Method, "Expected method 'PUT', got %s", r.Method)
@@ -604,7 +652,13 @@ func TestUpdateAccessPolicy(t *testing.T) {
 						"email_addresses": ["email1@example.com", "email2@example.com"],
 						"approvals_needed": 1
 					}
-				]
+				],
+				"connection_rules": {
+					"ssh": {
+						"usernames": ["root", "ec2-user"],
+						"allow_email_alias": true
+					}
+				}
 			}
 		}
 		`)
